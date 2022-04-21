@@ -37,8 +37,8 @@ class MainViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
         let character = charecters[indexPath.item]
-        let results = character.results
-        let result = results?[indexPath.item]
+        guard let results = character.results else { return }
+        let result = results[indexPath.item]
 
         cell.configur(with: result)
     

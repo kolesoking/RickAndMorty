@@ -12,7 +12,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var fullName: UILabel!
     
-    func configur(with character: Result?) {
+    func configur(with character: Result) {
         fullName.text = character?.name
         DispatchQueue.global().async {
             guard let url = URL(string: character?.image ?? "") else { return }
