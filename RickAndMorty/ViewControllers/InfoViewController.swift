@@ -8,22 +8,48 @@
 import UIKit
 
 class InfoViewController: UIViewController {
+    
+    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var firtsScene: UILabel!
+    @IBOutlet weak var statusColor: UIView!
+    
+    var result: Result!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getValue()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func getValue() {
+        
+        name.text = result.name
+        status.text = "\(result.species ?? "") - \(result.status ?? "")"
+        location.text = result.location?.name
+        firtsScene.text = result.origin?.name
+        DispatchQueue.global().async {
+            guard let url = URL(string: self.result.image ?? "") else { return }
+            guard let imageData = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                self.mainImage.image = UIImage(data: imageData)
+            }
+        }
+        setColorStatus()
     }
-    */
-
+    
+    private func setColorStatus() {
+        
+        if result.status == "Alive" {
+            statusColor.backgroundColor = .green
+        } else if result.status == "Dead" {
+            statusColor.backgroundColor = .red
+        } else {
+            statusColor.backgroundColor = .gray
+        }
+        
+    }
 }
