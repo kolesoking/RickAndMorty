@@ -11,7 +11,7 @@ private let reuseIdentifier = "Cell"
 
 class MainViewController: UICollectionViewController {
     
-    private var results: [Result] = []
+    private var results: [Resultat] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,25 +60,37 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
 extension MainViewController {
     func fetchCharecters() {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                print(error?.localizedDescription ?? "No error discription")
-                return
+        NetworkManager.shared.fetchCharacters("https://rickandmortyapi.com/api/character") { result in
+            switch result {
+            case .success(let character):
+                self.results = character.results ?? []
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
             }
-            
-            do {
-                let character = try JSONDecoder().decode(Character.self, from: data)
-                DispatchQueue.main.async {
-                    self.results = character.results ?? []
-                    self.collectionView.reloadData()
-                }
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }.resume()
+        }
     }
-
+        
 }
+        
+//        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else { return }
+//
+//        URLSession.shared.dataTask(with: url) { data, _, error in
+//            guard let data = data else {
+//                print(error?.localizedDescription ?? "No error discription")
+//                return
+//            }
+//
+//            do {
+//                let character = try JSONDecoder().decode(Character.self, from: data)
+//                DispatchQueue.main.async {
+//                    self.results = character.results ?? []
+//                    self.collectionView.reloadData()
+//                }
+//            } catch let error {
+//                print(error.localizedDescription)
+//            }
+//        }.resume()
+//    }
+
 

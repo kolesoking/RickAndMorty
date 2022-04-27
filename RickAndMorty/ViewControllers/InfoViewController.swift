@@ -16,7 +16,7 @@ class InfoViewController: UIViewController {
     @IBOutlet weak var firtsScene: UILabel!
     @IBOutlet weak var statusColor: UIView!
     
-    var result: Result!
+    var result: Resultat!
 
 
     override func viewDidLoad() {
