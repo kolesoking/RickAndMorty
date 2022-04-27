@@ -11,14 +11,13 @@ import Foundation
 struct Character: Decodable {
     let results: [Resultat]?
     
-    init(characterData: [String: Any]) {
-        let res = characterData["result"] as? [[String: Any]]
-        results = Resultat.getResultat(from: res ?? [[:]])
+    init(characterData: [[String: Any]]) {
+        results = Resultat.getResultat(from: characterData)
     }
     
     static func getCharacters(from value: Any) -> Character {
         let characterData = value as? [String: Any] ?? [:]
-        let results = characterData["result"] as? [String: Any] ?? [:]
+        let results = characterData["results"] as? [[String: Any]] ?? [[:]]
         
         return Character(characterData: results)
     }

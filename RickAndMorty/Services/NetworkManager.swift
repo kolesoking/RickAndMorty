@@ -30,7 +30,7 @@ class NetworkManager {
                 switch dataResponse.result {
                 case .success(let value):
                     let character = Character.getCharacters(from: value)
-                    print(value)
+//                    print(value)
                     DispatchQueue.main.async {
                         completion(.success(character))
                     }

@@ -181,8 +181,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="fullName" destination="lbJ-80-68A" id="a6h-rz-wl4"/>
-                                    <outlet property="image" destination="vJJ-jA-Bvx" id="7xg-jV-UE2"/>
+                                    <outlet property="fullName" destination="lbJ-80-68A" id="Wfs-8i-BUs"/>
+                                    <outlet property="image" destination="vJJ-jA-Bvx" id="Iht-9y-6Oc"/>
                                     <segue destination="6T8-Sb-0yH" kind="show" id="dGp-gS-N31"/>
                                 </connections>
                             </collectionViewCell>
